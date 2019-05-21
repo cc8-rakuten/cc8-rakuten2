@@ -43,19 +43,22 @@
     </v-toolbar>
 
     <v-content>
-      <StartScreen/>
+      <StartScreen v-if="!this.$store.state.submittedStatus"/>
+      <ResultScreen v-else />
     </v-content>
   </v-app>
 </template>
 
 <script>
 import StartScreen from './components/StartScreen'
+import ResultScreen from './components/ResultScreen'
 import Axios from 'axios'
 
 export default {
   name: 'App',
   components: {
-    StartScreen
+    StartScreen,
+    ResultScreen
   },
   data () {
     return {
@@ -75,6 +78,7 @@ export default {
           destination: this.destination
         }
       });
+      this.$store.commit("setTravelIdea", response.data);
     }
   }
 }
