@@ -7,7 +7,14 @@
       <v-spacer></v-spacer>
       <v-form>
         <v-layout row wrap>
-          <v-text-field label="Where to?" placeholder="Dreamland" v-model="destination"></v-text-field>
+          <vuetify-google-autocomplete
+            id="map"
+            label="Where to?"
+            placeholder="Dreamland"
+            v-on:placechanged="getAddressData"
+            types="(cities)"
+          ></vuetify-google-autocomplete>
+
           <v-menu
             v-model="menu"
             :close-on-content-click="true"
@@ -78,6 +85,7 @@ export default {
       });
       this.$store.commit("setTravelIdea", response.data);
     },
+    getAddressData: function(e) {},
     getSourceLocation: function() {
       navigator.geolocation.getCurrentPosition(
         succ => {
