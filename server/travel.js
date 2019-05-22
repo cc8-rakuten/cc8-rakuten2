@@ -5,6 +5,7 @@ const unirest = require("unirest");
 const router = express.Router();
 
 router.post("/travel", async (req, res) => {
+  console.log("here")
   let allAirports;
   unirest.get("https://cometari-airportsfinder-v1.p.rapidapi.com/api/airports/by-radius?radius=150&lng=139.727880&lat=35.658187")
     .header("X-RapidAPI-Host", "cometari-airportsfinder-v1.p.rapidapi.com")
@@ -13,7 +14,7 @@ router.post("/travel", async (req, res) => {
       const allAirports = result.body;
       const mainAirports = allAirports
         .filter(airport => airport.themes.length > 0)
-        .map(({code, city, name}) => ({code, city, name}));
+        .map(({ code, city, name }) => ({ code, city, name }));
       res.json(mainAirports);
     });
 
