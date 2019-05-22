@@ -10,6 +10,7 @@ router.post("/travel", async (req, res) => {
   const date = req.body.date;
   const destination = req.body.destination;
   const radius = "150";
+  console.log(sourceIP);
   if (sourceIP.indexOf("127.") > -1) {
     sourceIP = "121.1.253.218";
   }
