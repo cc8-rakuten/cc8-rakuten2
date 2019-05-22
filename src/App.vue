@@ -7,11 +7,7 @@
       <v-spacer></v-spacer>
       <v-form>
         <v-layout row wrap>
-          <v-text-field
-            label="Where to?"
-            placeholder="Dreamland"
-            v-model="destination"
-          ></v-text-field>
+          <v-text-field label="Where to?" placeholder="Dreamland" v-model="destination"></v-text-field>
           <v-menu
             v-model="menu"
             :close-on-content-click="true"
@@ -37,49 +33,62 @@
         </v-layout>
       </v-form>
 
-      <v-flex>
-        
-      </v-flex>
+      <v-flex></v-flex>
     </v-toolbar>
 
     <v-content>
       <StartScreen v-if="!this.$store.state.submittedStatus"/>
-      <ResultScreen v-else />
+      <ResultScreen v-else/>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import StartScreen from './components/StartScreen'
-import ResultScreen from './components/ResultScreen'
-import Axios from 'axios'
+import StartScreen from "./components/StartScreen";
+import ResultScreen from "./components/ResultScreen";
+import Axios from "axios";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     StartScreen,
     ResultScreen
   },
-  data () {
+  data() {
     return {
       date: new Date().toISOString().substr(0, 10),
       menu: false,
-      destination: ""
-    }
+      destination: "",
+      source: {}
+    };
+  },
+  beforeMount() {
+    this.getSourceLocation();
   },
   methods: {
-    getTripData: async function ()  {
-      console.log(this.date, this.destination);
+    getTripData: async function() {
       const response = await Axios({
-        method: 'post',
-        url: '/api/travel',
+        method: "post",
+        url: "/api/travel",
         data: {
           date: this.date,
-          destination: this.destination
+          destination: this.destination,
+          source: this.source
         }
       });
       this.$store.commit("setTravelIdea", response.data);
+    },
+    getSourceLocation: function() {
+      navigator.geolocation.getCurrentPosition(
+        succ => {
+          this.source.lat = succ.coords.latitude;
+          this.source.lng = succ.coords.longitude;
+        },
+        err => {
+          throw new Error(err);
+        }
+      );
     }
   }
-}
+};
 </script>
