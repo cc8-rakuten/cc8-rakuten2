@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post("/travel", async (req, res) => {
   console.log(req.headers);
-  res.json(req.headers.origin);
+  res.json(req.headers["x-forwarded-for"]);
   const date = req.body.date;
   const destination = req.body.destination;
   const radius = "150";
