@@ -11,7 +11,7 @@
             id="map"
             label="Where to?"
             placeholder="Dreamland"
-            v-on:placechanged="getAddressData"
+            v-on:placechanged="getDestinationData"
             types="(cities)"
           ></vuetify-google-autocomplete>
 
@@ -69,9 +69,7 @@ export default {
       source: {}
     };
   },
-  beforeMount() {
-    this.getSourceLocation();
-  },
+  beforeMount() {},
   methods: {
     getTripData: async function() {
       const response = await Axios({
@@ -79,23 +77,13 @@ export default {
         url: "/api/travel",
         data: {
           date: this.date,
-          destination: this.destination,
-          source: this.source
+          destination: this.destination
         }
       });
       this.$store.commit("setTravelIdea", response.data);
     },
-    getAddressData: function(e) {},
-    getSourceLocation: function() {
-      navigator.geolocation.getCurrentPosition(
-        succ => {
-          this.source.lat = succ.coords.latitude;
-          this.source.lng = succ.coords.longitude;
-        },
-        err => {
-          throw new Error(err);
-        }
-      );
+    getDestinationData: function(e) {
+      this.destination = e;
     }
   }
 };

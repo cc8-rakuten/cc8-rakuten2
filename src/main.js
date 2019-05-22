@@ -3,11 +3,13 @@ import './plugins/vuetify'
 import App from './App.vue'
 import Vuex from 'vuex'
 import Vuetify from 'vuetify'
+import flights from "../data/flights.json"
 
 import VuetifyGoogleAutocomplete from 'vuetify-google-autocomplete';
 
 Vue.use(VuetifyGoogleAutocomplete, {
-  apiKey: 'AIzaSyAn19RJD6FC5aLwzr0AbsmzP4rmQjoJENU'
+  apiKey: 'AIzaSyAn19RJD6FC5aLwzr0AbsmzP4rmQjoJENU',
+  language: "en"
 });
 
 Vue.use(Vuex);
@@ -17,10 +19,12 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
   state: {
     submittedStatus: false,
+    flightsInfo: flights,
     travelIdea: {}
   },
   mutations: {
     setTravelIdea(state, newTravelIdea) {
+      console.log(state.flightsInfo)
       state.travelIdea = newTravelIdea;
       state.submittedStatus = true;
     }
