@@ -69,7 +69,12 @@ export default {
       source: {}
     };
   },
-  beforeMount() {},
+  beforeUpdate() {
+    console.log("beforeUpdate working");
+    if ($store.getters.pictureURL !== "") {
+      getFlightsData;
+    }
+  },
   methods: {
     getTripData: async function() {
       const response = await Axios({
@@ -80,10 +85,23 @@ export default {
           destination: this.destination
         }
       });
+      // receive to/from and to/fromAirport
       this.$store.commit("setTravelIdea", response.data);
     },
     getDestinationData: function(e) {
       this.destination = e;
+    },
+    getFlightsData: async function() {
+      const response = await Axios({
+        method: "post",
+        ur: "/api/flights",
+        data: {
+          date: this.date,
+          fromAirport: $store.getters.from,
+          toAirport: $store.getters.destination
+        }
+      });
+      this.$store.commit("setFlightData", response.data);
     }
   }
 };
