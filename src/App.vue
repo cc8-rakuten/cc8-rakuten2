@@ -70,7 +70,7 @@ export default {
     };
   },
   beforeUpdate() {
-    console.log("beforeUpdate working");
+    console.log("beforeUpdate runnning");
     if ($store.getters.pictureURL !== "") {
       getFlightsData;
     }
@@ -86,6 +86,7 @@ export default {
         }
       });
       // receive to/from and to/fromAirport
+      console.log(response.data);
       this.$store.commit("setTravelIdea", response.data);
     },
     getDestinationData: function(e) {
