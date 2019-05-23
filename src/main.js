@@ -18,16 +18,16 @@ Vue.config.productionTip = false;
 
 const store = new Vuex.Store({
   state: {
-    submittedStatus: false,
+    submittedStatus: true,
     flightsInfo: flights,
     tripPlan: {
-      from: "Tokyo",
-      destination: "Paris",
-      fromAirport: "NRT",
-      toAirport: "CDG",
+      from: "",
+      destination: "",
+      fromAirport: "",
+      toAirport: "",
       flight: {
-        airportSummary1: "NRT to CDG",
-        airportSummary2: "CDG to NRT",
+        airportSummary1: "",
+        airportSummary2: "",
         price: 0
       },
       pictureURL: "https://media.giphy.com/media/vQBkSwVkEZfTq/giphy.gif"

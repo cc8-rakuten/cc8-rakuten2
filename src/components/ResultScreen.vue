@@ -2,7 +2,7 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex d-flex xs12 sm6 md7>
-        <v-img :src="this.$store.state.tripPlan.pictureURL"></v-img>
+        <v-img :src="this.$store.state.tripPlan.pictureURL" class="travel-image"></v-img>
       </v-flex>
       <v-flex xs12 sm6 md5>
         <v-layout row wrap>
@@ -39,5 +39,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.travel-image {
+  max-height: 100vh;
+  width: auto;
+}
 </style>
