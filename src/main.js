@@ -21,27 +21,26 @@ const store = new Vuex.Store({
     submittedStatus: false,
     flightsInfo: flights,
     tripPlan: {
-      from: "Tokyo",
-      destination: "Paris",
-      fromAirport: "NRT",
-      toAirport: "CDG",
+      from: "",
+      destination: "",
+      fromAirport: "",
+      toAirport: "",
       flight: {
-        airportSummary1: "NRT to CDG",
-        airportSummary2: "CDG to NRT",
+        airportSummary1: "",
+        airportSummary2: "",
         price: 0
       },
-      pictureURL: "https://media.giphy.com/media/vQBkSwVkEZfTq/giphy.gif"
+      pictureURL: ""
     }
   },
   mutations: {
     setTravelIdea(state, newTravelIdea) {
-      console.log(state.flightsInfo);
       state.submittedStatus = true;
       state.tripPlan.from = newTravelIdea.from;
-      state.tripPlan.to = newTravelIdea.to;
+      state.tripPlan.destination = newTravelIdea.to;
       state.tripPlan.fromAirport = newTravelIdea.fromAirport;
       state.tripPlan.toAirport = newTravelIdea.toAirport;
-      // state.tripPlan.pictureURL = newTravelIdea.pictureURL;
+      state.tripPlan.pictureURL = newTravelIdea.pictureURL;
     },
     setFlightData(state, flights) {
       state.tripPlan.flight.airportSummary1 = flights.airportSummary1;
