@@ -56,7 +56,8 @@ const store = new Vuex.Store({
     toAirport: state => state.tripPlan.toAirport,
     airportSummary1: state => state.tripPlan.flight.airportSummary1,
     airportSummary2: state => state.tripPlan.flight.airportSummary2,
-    price: state => state.tripPlan.flight.price
+    price: state => state.tripPlan.flight.price,
+    pictureURL: state => state.tripPlan.pictureURL
   }
 });
 
