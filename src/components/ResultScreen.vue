@@ -9,11 +9,15 @@
           <v-flex v-for="n in 1" :key="n" d-flex xs12>
             <v-card color="grey" dark>
               <v-card-title primary-title>
-                <h3>Travel Summary</h3>
+                <h2>Travel Summary</h2>
               </v-card-title>
               <v-card-text>
-                <div>From: {{$store.getters.from}}</div>
-                <div>To: {{$store.getters.destination}}</div>
+                <div>
+                  <h3>From: {{$store.getters.from}}</h3>
+                </div>
+                <div>
+                  <h3>To: {{$store.getters.destination}}</h3>
+                </div>
               </v-card-text>
             </v-card>
           </v-flex>
@@ -21,13 +25,24 @@
           <v-flex d-flex xs12 v-if="$store.getters.airportSummary1 !== ''">
             <v-card color="grey" dark>
               <v-card-text>
-                <h3>Flight Information</h3>
+                <h2>Flight Information</h2>
               </v-card-text>
               <v-card-text>
-                <div>{{$store.getters.airportSummary1}}</div>
-                <div>{{$store.getters.airportSummary2}}</div>
-                <div>Price: {{$store.getters.price}}</div>
+                <div>
+                  <h3>{{$store.getters.fromAirport}} to {{$store.getters.toAirport}}</h3>
+                </div>
+                <div>
+                  <h3>{{$store.getters.toAirport}} to {{$store.getters.toAirport}}</h3>
+                </div>
+                <div>
+                  <h3>Price: ${{$store.getters.price}}</h3>
+                </div>
               </v-card-text>
+            </v-card>
+          </v-flex>
+          <v-flex d-flex xs12 v-else>
+            <v-card>
+              <v-card-text>Searching flights ...</v-card-text>
             </v-card>
           </v-flex>
         </v-layout>

@@ -30,7 +30,7 @@ const store = new Vuex.Store({
         airportSummary2: "",
         price: 0
       },
-      pictureURL: "https://media.giphy.com/media/vQBkSwVkEZfTq/giphy.gif"
+      pictureURL: ""
     }
   },
   mutations: {
@@ -40,7 +40,7 @@ const store = new Vuex.Store({
       state.tripPlan.destination = newTravelIdea.to;
       state.tripPlan.fromAirport = newTravelIdea.fromAirport;
       state.tripPlan.toAirport = newTravelIdea.toAirport;
-      // state.tripPlan.pictureURL = newTravelIdea.pictureURL;
+      state.tripPlan.pictureURL = newTravelIdea.pictureURL;
     },
     setFlightData(state, flights) {
       state.tripPlan.flight.airportSummary1 = flights.airportSummary1;
