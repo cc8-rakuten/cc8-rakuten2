@@ -18,7 +18,7 @@ Vue.config.productionTip = false;
 
 const store = new Vuex.Store({
   state: {
-    submittedStatus: false,
+    submittedStatus: 0,
     flightsInfo: flights,
     tripPlan: {
       from: "",
@@ -34,8 +34,11 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
+    setLoadingStatus(state) {
+      state.submittedStatus = 1;
+    },
     setTravelIdea(state, newTravelIdea) {
-      state.submittedStatus = true;
+      state.submittedStatus = 2;
       state.tripPlan.from = newTravelIdea.from;
       state.tripPlan.destination = newTravelIdea.to;
       state.tripPlan.fromAirport = newTravelIdea.fromAirport;
@@ -43,6 +46,7 @@ const store = new Vuex.Store({
       state.tripPlan.pictureURL = newTravelIdea.pictureURL;
     },
     setFlightData(state, flights) {
+      state.submittedStatus = 3;
       state.tripPlan.flight.airportSummary1 = flights.airportSummary1;
       state.tripPlan.flight.airportSummary2 = flights.airportSummary2;
       state.tripPlan.flight.price = flights.price;
