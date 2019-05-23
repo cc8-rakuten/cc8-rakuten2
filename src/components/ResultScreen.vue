@@ -32,7 +32,7 @@
                   <h3>{{$store.getters.fromAirport}} to {{$store.getters.toAirport}}</h3>
                 </div>
                 <div>
-                  <h3>{{$store.getters.toAirport}} to {{$store.getters.toAirport}}</h3>
+                  <h3>{{$store.getters.toAirport}} to {{$store.getters.fromAirport}}</h3>
                 </div>
                 <div>
                   <h3>Price: ${{$store.getters.price}}</h3>
