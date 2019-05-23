@@ -48,7 +48,7 @@ router.post("/travel", async (req, res) => {
   ];
 
   await Promise.all(initialRequests)
-    .then((results) => {
+    .then(results => {
       console.log("entering processing of geoloc");
       let imgResult = results[1];
       pictureURL = imgResult.data.value[4].url;
@@ -78,12 +78,12 @@ router.post("/travel", async (req, res) => {
       });
       return Promise.all([fromAirport, toAirport]);
     })
-    .then((result) => {
-      const fromToAirports = result.map((airports) => {
+    .then(result => {
+      const fromToAirports = result.map(airports => {
         const allAirports = airports.data;
         return allAirports
-          .filter((airport) => airport.themes.length > 0)
-          .map((airport) => airport.code)[0];
+          .filter(airport => airport.themes.length > 0)
+          .map(airport => airport.code)[0];
       });
       const response = {
         from: fromCity,
@@ -92,10 +92,9 @@ router.post("/travel", async (req, res) => {
         toAirport: fromToAirports[1],
         pictureURL
       };
-      console.log(response);
       res.json(response);
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(400);
     });
@@ -128,10 +127,10 @@ router.post("/flights", async (req, res) => {
 
   Promise.all([goingFlight, returnFlight])
 
-    .then((flights) => {
+    .then(flights => {
       console.log("entering processing of flight search sessions");
       return Promise.all(
-        flights.map((flight) => {
+        flights.map(flight => {
           return axios({
             method: "GET",
             url: `https://apidojo-kayak-v1.p.rapidapi.com/flights/poll?searchid=${
@@ -145,9 +144,8 @@ router.post("/flights", async (req, res) => {
         })
       );
     })
-    .then((flights) => {
-      console.log(flights);
-      const resultFlights = flights.map((flight) => {
+    .then(flights => {
+      const resultFlights = flights.map(flight => {
         return flight.data.tripset.reduce(
           (a, b) => {
             if (a.lowTotal < b.lowTotal) {
@@ -164,7 +162,7 @@ router.post("/flights", async (req, res) => {
         price
       });
     })
-    .catch((err) => {
+    .catch(err => {
       console.log(err);
       res.status(400);
     });

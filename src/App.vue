@@ -44,14 +44,16 @@
     </v-toolbar>
 
     <v-content>
-      <StartScreen v-if="!this.$store.state.submittedStatus"/>
-      <ResultScreen v-else/>
+      <StartScreen v-if="this.$store.state.submittedStatus === 0"/>
+      <LoadingScreen v-if="this.$store.state.submittedStatus === 1"/>
+      <ResultScreen v-if="this.$store.state.submittedStatus > 1"/>
     </v-content>
   </v-app>
 </template>
 
 <script>
 import StartScreen from "./components/StartScreen";
+import LoadingScreen from "./components/LoadingScreen";
 import ResultScreen from "./components/ResultScreen";
 import Axios from "axios";
 
@@ -59,7 +61,8 @@ export default {
   name: "App",
   components: {
     StartScreen,
-    ResultScreen
+    ResultScreen,
+    LoadingScreen
   },
   data() {
     return {
@@ -72,6 +75,7 @@ export default {
 
   methods: {
     getTripData: async function() {
+      this.$store.commit("setLoadingStatus");
       const response = await Axios({
         method: "post",
         url: "/api/travel",

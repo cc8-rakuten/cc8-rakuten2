@@ -21,12 +21,11 @@
               </v-card-text>
             </v-card>
           </v-flex>
-          <StartScreen v-if="!this.$store.state.submittedStatus"/>
-          <v-flex d-flex xs12 v-if="$store.getters.airportSummary1 !== ''">
+          <v-flex d-flex xs12 v-if="this.$store.state.submittedStatus === 3">
             <v-card color="grey" dark>
-              <v-card-text>
+              <v-card-title primary-title>
                 <h2>Flight Information</h2>
-              </v-card-text>
+              </v-card-title>
               <v-card-text>
                 <div>
                   <h3>{{$store.getters.fromAirport}} to {{$store.getters.toAirport}}</h3>
@@ -40,10 +39,10 @@
               </v-card-text>
             </v-card>
           </v-flex>
-          <v-flex d-flex xs12 v-else>
-            <v-card>
-              <v-card-text>Searching flights ...</v-card-text>
-            </v-card>
+          <v-flex d-flex xs12 v-if="this.$store.state.submittedStatus === 2">
+            <div class="flight-loader">
+              <h4>Searching flights ...</h4>
+            </div>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -63,5 +62,15 @@ export default {
 .travel-image {
   max-height: 100vh;
   width: auto;
+}
+
+.flight-loader {
+  animation: flash 2s ease infinite alternate;
+}
+
+@keyframes flash {
+  50% {
+    opacity: 0;
+  }
 }
 </style>
