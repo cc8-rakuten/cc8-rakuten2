@@ -5,42 +5,41 @@
         <span>Take a week off with friends!</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-form>
-        <v-layout row wrap>
-          <vuetify-google-autocomplete
-            id="map"
-            label="Where to?"
-            placeholder="Dreamland"
-            v-on:placechanged="getDestinationData"
-            types="(cities)"
-          ></vuetify-google-autocomplete>
+      <v-flex md7>
+        <v-form>
+          <v-layout>
+            <vuetify-google-autocomplete
+              id="map"
+              label="Where to?"
+              placeholder="Dreamland"
+              v-on:placechanged="getDestinationData"
+              types="(cities)"
+              clearable
+            ></vuetify-google-autocomplete>
 
-          <v-menu
-            v-model="menu"
-            :close-on-content-click="true"
-            :nudge-right="40"
-            lazy
-            transition="scale-transition"
-            offset-y
-            full-width
-            min-width="290px"
-          >
-            <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date"
-                prepend-icon="event"
-                label="When do you leave?"
-                readonly
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker v-model="date" @input="menu2 = false"></v-date-picker>
-          </v-menu>
-          <v-btn @click="getTripData">Go!!</v-btn>
-        </v-layout>
-      </v-form>
-
-      <v-flex></v-flex>
+            <v-menu
+              v-model="menu"
+              :close-on-content-click="true"
+              :nudge-right="40"
+              lazy
+              transition="scale-transition"
+              offset-y
+            >
+              <template v-slot:activator="{ on }">
+                <v-text-field
+                  v-model="date"
+                  prepend-icon="event"
+                  label="When do you leave?"
+                  readonly
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" @input="menu = false"></v-date-picker>
+            </v-menu>
+            <v-btn @click="getTripData">Go!!</v-btn>
+          </v-layout>
+        </v-form>
+      </v-flex>
     </v-toolbar>
 
     <v-content>
@@ -103,3 +102,6 @@ export default {
   }
 };
 </script>
+<style>
+
+</style>

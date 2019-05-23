@@ -18,12 +18,8 @@ router.post("/travel", async (req, res) => {
   const radius = "150";
   let fromCity, toCity, pictureURL;
   toCity = req.body.destination.name + ", " + req.body.destination.country;
-  const imgSearch =
-    "sightseeing+" +
-    req.body.destination.name +
-    "+" +
-    req.body.destination.country;
-  // console.log(req.body.destination);
+  const imgSearch = req.body.destination.name;
+  console.log(imgSearch);
   if (sourceIP.indexOf("127.") > -1) {
     sourceIP = "121.1.253.218";
   }
@@ -39,11 +35,13 @@ router.post("/travel", async (req, res) => {
     }),
     axios({
       method: "GET",
-      url: `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=${imgSearch}&safeSearch=true`,
-      headers: {
-        "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
-        "X-RapidAPI-Key": process.env.AIRPORT_API_KEY
-      }
+      url: `https://api.unsplash.com/search/photos?query=${imgSearch}&client_id=${process.env.UNSPLASH_API_KEY}`,
+      // method: "GET",
+      // url: `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?autoCorrect=false&pageNumber=1&pageSize=10&q=${imgSearch}&safeSearch=true`,
+      // headers: {
+      //   "X-RapidAPI-Host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+      //   "X-RapidAPI-Key": process.env.AIRPORT_API_KEY
+      // }
     })
   ];
 
@@ -51,7 +49,9 @@ router.post("/travel", async (req, res) => {
     .then(results => {
       console.log("entering processing of geoloc");
       let imgResult = results[1];
-      pictureURL = imgResult.data.value[4].url;
+      let randImage = Math.floor(Math.random() * 10)
+      console.log(randImage, imgResult.data.results.length);
+      pictureURL = imgResult.data.results[randImage].urls.regular;
       console.log(pictureURL);
       let result = results[0];
       const fromLng = result.data.ip.longitude;
