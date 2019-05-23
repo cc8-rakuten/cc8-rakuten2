@@ -18,7 +18,7 @@ Vue.config.productionTip = false;
 
 const store = new Vuex.Store({
   state: {
-    submittedStatus: true,
+    submittedStatus: false,
     flightsInfo: flights,
     tripPlan: {
       from: "",
@@ -35,10 +35,9 @@ const store = new Vuex.Store({
   },
   mutations: {
     setTravelIdea(state, newTravelIdea) {
-      console.log(state.flightsInfo);
       state.submittedStatus = true;
       state.tripPlan.from = newTravelIdea.from;
-      state.tripPlan.to = newTravelIdea.to;
+      state.tripPlan.destination = newTravelIdea.to;
       state.tripPlan.fromAirport = newTravelIdea.fromAirport;
       state.tripPlan.toAirport = newTravelIdea.toAirport;
       // state.tripPlan.pictureURL = newTravelIdea.pictureURL;

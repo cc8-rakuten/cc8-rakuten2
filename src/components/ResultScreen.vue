@@ -8,16 +8,21 @@
         <v-layout row wrap>
           <v-flex v-for="n in 1" :key="n" d-flex xs12>
             <v-card color="grey" dark>
-              <v-card-title primary-title>Travel Summary</v-card-title>
+              <v-card-title primary-title>
+                <h3>Travel Summary</h3>
+              </v-card-title>
               <v-card-text>
                 <div>From: {{$store.getters.from}}</div>
                 <div>To: {{$store.getters.destination}}</div>
               </v-card-text>
             </v-card>
           </v-flex>
-          <v-flex d-flex xs12>
+          <StartScreen v-if="!this.$store.state.submittedStatus"/>
+          <v-flex d-flex xs12 v-if="$store.getters.airportSummary1 !== ''">
             <v-card color="grey" dark>
-              <v-card-text>Flight Information</v-card-text>
+              <v-card-text>
+                <h3>Flight Information</h3>
+              </v-card-text>
               <v-card-text>
                 <div>{{$store.getters.airportSummary1}}</div>
                 <div>{{$store.getters.airportSummary2}}</div>
